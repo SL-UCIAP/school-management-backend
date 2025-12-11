@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "PuhRjkbcrcI9BnGniUMot/qtc4HLbkmgxUc0iNTktxE=",
+  "Source": "school-management-service",
+  "BasePath": "_content/school-management-service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
