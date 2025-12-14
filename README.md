@@ -1,22 +1,60 @@
-# 🏫 School Management System — Backend (ASP.NET Core 8 Web API)
+# School Management System (SMS)
 
-This is the backend service for the **School Management System**, developed using **C# and ASP.NET Core 8 Web API**.  
-The system manages student data, classes, teachers, and provides secure REST APIs for integration with the **UCIAP Platform** and other institutional services.
+## Overview
+The **School Management System (SMS)** is a core subsystem of the **Unified Citizen Information Access Portal (UCIAP)**. It manages student academic records and provides verified educational data to UCIAP through secure APIs.
 
----
-
-## 🚀 Features
-
-- ✔ RESTful API built with ASP.NET Core 8  
-- ✔ Student, Teacher, Class & Enrollment management  
-- ✔ Layered architecture (API → Application → Domain → Infrastructure)  
-- ✔ Entity Framework Core for database operations  
-- ✔ DTO-based request/response models  
-- ✔ Dependency Injection (DI) for services & repositories  
-- ✔ Fully ready for SQL databases 
-- ✔ Easy integration with UCIAP through API adapters  
+The system ensures that student information is accessed only by authorized institutions under strict authentication and consent controls.
 
 ---
 
-## 📂 Project Structure
+## Key Features
+- Student profile and academic record management
+- Secure RESTful APIs for data retrieval
+- Role-based access control
+- Integration with UCIAP for education data verification
+- Audit-friendly data access
+
+---
+
+## Technology Stack
+### Backend
+- .NET 8 (ASP.NET Core Web API)
+
+### Frontend
+- Angular
+
+### Database
+- PostgreSQL / SQL Server
+
+### Security
+- OAuth 2.0 / OpenID Connect
+- JWT-based authentication
+- Keycloak (via UCIAP)
+
+---
+
+## System Integration
+- Operates as an **education data provider** within the UCIAP ecosystem
+- Communicates with UCIAP through secure REST APIs
+- Does not expose student data directly to third parties
+- All requests are validated using Keycloak-issued JWT tokens
+
+---
+
+## Developer
+- **Garuka Gimhan**
+
+---
+
+## Purpose
+This system was developed for academic purposes to demonstrate:
+- Secure student data management
+- API-driven system integration
+- Modern authentication and authorization practices
+
+---
+
+## License
+This project is intended for educational use only.
+
 
