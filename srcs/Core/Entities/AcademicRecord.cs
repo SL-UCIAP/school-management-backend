@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,6 @@ namespace school_management_service.src.Core.Entities
     public class AcademicRecord
     {
         
-    // PRIMARY KEY
     [Key]
     public int Id { get; set; }
 
@@ -32,8 +32,10 @@ namespace school_management_service.src.Core.Entities
     public DateTime CreatedAt { get; set; }       // Timestamp when record created
   
     // FOREIGN KEY (links to Student/Citizen)
-    public required string CitizenId { get; set; }
-    public Student student {get;set;}
+    public required Guid CitizenId { get; set; }
+
+    [ForeignKey("CitizenId")]
+    public Student Student {get;set;}
  
 
     // FOREIGN KEY (links to Subject)

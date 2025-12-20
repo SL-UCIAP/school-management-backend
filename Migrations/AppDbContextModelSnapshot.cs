@@ -22,21 +22,6 @@ namespace school_management_service.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ExtracurricularActivityStudent", b =>
-                {
-                    b.Property<int>("ExtracurricularActivitiesActivityId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("studentsCitizenId")
-                        .HasColumnType("text");
-
-                    b.HasKey("ExtracurricularActivitiesActivityId", "studentsCitizenId");
-
-                    b.HasIndex("studentsCitizenId");
-
-                    b.ToTable("ExtracurricularActivityStudent");
-                });
-
             modelBuilder.Entity("school_management_service.src.Core.Entities.AcademicRecord", b =>
                 {
                     b.Property<int>("Id")
@@ -49,9 +34,8 @@ namespace school_management_service.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("CitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CitizenId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -82,15 +66,11 @@ namespace school_management_service.Migrations
                     b.Property<decimal>("TotalMarks")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("studentCitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("CitizenId");
 
-                    b.HasIndex("studentCitizenId");
+                    b.HasIndex("SubjectId");
 
                     b.ToTable("AcademicRecords");
                 });
@@ -103,12 +83,14 @@ namespace school_management_service.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AccessStatus")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("AccessTimestamp")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CitizenId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("DataAccessed")
                         .IsRequired()
@@ -130,13 +112,9 @@ namespace school_management_service.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("studentCitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("studentCitizenId");
+                    b.HasIndex("CitizenId");
 
                     b.ToTable("AccessLogs");
                 });
@@ -152,9 +130,8 @@ namespace school_management_service.Migrations
                     b.Property<DateTime>("AttendanceDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CitizenId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("MarkedAt")
                         .HasColumnType("timestamp with time zone");
@@ -172,15 +149,11 @@ namespace school_management_service.Migrations
                     b.Property<int>("SubjectId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("studentCitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("AttendanceId");
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("CitizenId");
 
-                    b.HasIndex("studentCitizenId");
+                    b.HasIndex("SubjectId");
 
                     b.ToTable("Attendances");
                 });
@@ -197,9 +170,8 @@ namespace school_management_service.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("CitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CitizenId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -214,9 +186,6 @@ namespace school_management_service.Migrations
                     b.Property<int>("RecordType")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ReportedBy")
-                        .HasColumnType("integer");
-
                     b.Property<string>("SeverityLevel")
                         .IsRequired()
                         .HasColumnType("text");
@@ -224,15 +193,11 @@ namespace school_management_service.Migrations
                     b.Property<int>("TeacherId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("studentCitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TeacherId");
+                    b.HasIndex("CitizenId");
 
-                    b.HasIndex("studentCitizenId");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("BehavioralRecords");
                 });
@@ -253,9 +218,8 @@ namespace school_management_service.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("CitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CitizenId")
+                        .HasColumnType("uuid");
 
                     b.Property<byte[]>("DigitalSignature")
                         .IsRequired()
@@ -279,13 +243,9 @@ namespace school_management_service.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("studentCitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("CetificateId");
 
-                    b.HasIndex("studentCitizenId");
+                    b.HasIndex("CitizenId");
 
                     b.ToTable("Certificates");
                 });
@@ -298,9 +258,8 @@ namespace school_management_service.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CitizenId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("ConsentExpiryDate")
                         .HasColumnType("timestamp with time zone");
@@ -327,13 +286,9 @@ namespace school_management_service.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("studentCitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("studentCitizenId");
+                    b.HasIndex("CitizenId");
 
                     b.ToTable("ConsentManagements");
                 });
@@ -353,9 +308,6 @@ namespace school_management_service.Migrations
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("CoordinatorId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -383,9 +335,8 @@ namespace school_management_service.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("CitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CitizenId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ContactNumber")
                         .IsRequired()
@@ -410,13 +361,9 @@ namespace school_management_service.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("studentCitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("GuardianId");
 
-                    b.HasIndex("studentCitizenId");
+                    b.HasIndex("CitizenId");
 
                     b.ToTable("ParentGuardians");
                 });
@@ -430,9 +377,6 @@ namespace school_management_service.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ClassId"));
 
                     b.Property<int>("AcademicYear")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ClassTeacherId")
                         .HasColumnType("integer");
 
                     b.Property<string>("GradeLevel")
@@ -462,8 +406,9 @@ namespace school_management_service.Migrations
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.Student", b =>
                 {
-                    b.Property<string>("CitizenId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("CitizenId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -505,9 +450,8 @@ namespace school_management_service.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("SchoolStudentId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("SchoolStudentId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Section")
                         .IsRequired()
@@ -519,12 +463,9 @@ namespace school_management_service.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("schoolClassClassId")
-                        .HasColumnType("integer");
-
                     b.HasKey("CitizenId");
 
-                    b.HasIndex("schoolClassClassId");
+                    b.HasIndex("ClassId");
 
                     b.ToTable("Students");
                 });
@@ -547,9 +488,8 @@ namespace school_management_service.Migrations
                     b.Property<int>("ActivityId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("CitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CitizenId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("timestamp with time zone");
@@ -558,49 +498,26 @@ namespace school_management_service.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("extracurricularActivityActivityId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("studentCitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("EnrollmentId");
 
-                    b.HasIndex("extracurricularActivityActivityId");
+                    b.HasIndex("ActivityId");
 
-                    b.HasIndex("studentCitizenId");
+                    b.HasIndex("CitizenId");
 
                     b.ToTable("StudentActivities");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.StudentExtracurricular", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<Guid>("CitizenId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("ActivityId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("CitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.HasKey("CitizenId", "ActivityId");
 
-                    b.Property<int>("extracurricularActivityActivityId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("studentCitizenId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("extracurricularActivityActivityId");
-
-                    b.HasIndex("studentCitizenId");
+                    b.HasIndex("ActivityId");
 
                     b.ToTable("StudentExtracurriculars");
                 });
@@ -687,196 +604,183 @@ namespace school_management_service.Migrations
                     b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("ExtracurricularActivityStudent", b =>
-                {
-                    b.HasOne("school_management_service.src.Core.Entities.ExtracurricularActivity", null)
-                        .WithMany()
-                        .HasForeignKey("ExtracurricularActivitiesActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("school_management_service.src.Core.Entities.Student", null)
-                        .WithMany()
-                        .HasForeignKey("studentsCitizenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("school_management_service.src.Core.Entities.AcademicRecord", b =>
                 {
+                    b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
+                        .WithMany("AcademicRecords")
+                        .HasForeignKey("CitizenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("school_management_service.src.Core.Entities.Subject", "subject")
                         .WithMany("AcademicRecords")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("school_management_service.src.Core.Entities.Student", "student")
-                        .WithMany("AcademicRecords")
-                        .HasForeignKey("studentCitizenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("student");
+                    b.Navigation("Student");
 
                     b.Navigation("subject");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.AccessLog", b =>
                 {
-                    b.HasOne("school_management_service.src.Core.Entities.Student", "student")
+                    b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
                         .WithMany("AccessLogs")
-                        .HasForeignKey("studentCitizenId")
+                        .HasForeignKey("CitizenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("student");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.Attendance", b =>
                 {
-                    b.HasOne("school_management_service.src.Core.Entities.Subject", "subject")
+                    b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
+                        .WithMany("Attendances")
+                        .HasForeignKey("CitizenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("school_management_service.src.Core.Entities.Subject", "Subject")
                         .WithMany("Attendances")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("school_management_service.src.Core.Entities.Student", "student")
-                        .WithMany("Attendances")
-                        .HasForeignKey("studentCitizenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Student");
 
-                    b.Navigation("student");
-
-                    b.Navigation("subject");
+                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.BehavioralRecord", b =>
                 {
-                    b.HasOne("school_management_service.src.Core.Entities.Teacher", "teacher")
+                    b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
+                        .WithMany("BehavioralRecords")
+                        .HasForeignKey("CitizenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("school_management_service.src.Core.Entities.Teacher", "ReportedBy")
                         .WithMany("BehavioralRecords")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("school_management_service.src.Core.Entities.Student", "student")
-                        .WithMany("BehavioralRecords")
-                        .HasForeignKey("studentCitizenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ReportedBy");
 
-                    b.Navigation("student");
-
-                    b.Navigation("teacher");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.Cetificate", b =>
                 {
-                    b.HasOne("school_management_service.src.Core.Entities.Student", "student")
+                    b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
                         .WithMany("Cetificates")
-                        .HasForeignKey("studentCitizenId")
+                        .HasForeignKey("CitizenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("student");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.ConsentManagement", b =>
                 {
-                    b.HasOne("school_management_service.src.Core.Entities.Student", "student")
+                    b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
                         .WithMany("ConsentManagements")
-                        .HasForeignKey("studentCitizenId")
+                        .HasForeignKey("CitizenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("student");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.ExtracurricularActivity", b =>
                 {
-                    b.HasOne("school_management_service.src.Core.Entities.Teacher", "teacher")
+                    b.HasOne("school_management_service.src.Core.Entities.Teacher", "Teacher")
                         .WithMany("ExtracurricularActivities")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("teacher");
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.ParentGuardian", b =>
                 {
-                    b.HasOne("school_management_service.src.Core.Entities.Student", "student")
+                    b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
                         .WithMany("ParentGuardians")
-                        .HasForeignKey("studentCitizenId")
+                        .HasForeignKey("CitizenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("student");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.SchoolClass", b =>
                 {
-                    b.HasOne("school_management_service.src.Core.Entities.Teacher", "teacher")
+                    b.HasOne("school_management_service.src.Core.Entities.Teacher", "Teacher")
                         .WithMany("SchoolClasses")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("teacher");
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.Student", b =>
                 {
-                    b.HasOne("school_management_service.src.Core.Entities.SchoolClass", "schoolClass")
+                    b.HasOne("school_management_service.src.Core.Entities.SchoolClass", "SchoolClass")
                         .WithMany("Students")
-                        .HasForeignKey("schoolClassClassId")
+                        .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("schoolClass");
+                    b.Navigation("SchoolClass");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.StudentActivity", b =>
                 {
-                    b.HasOne("school_management_service.src.Core.Entities.ExtracurricularActivity", "extracurricularActivity")
+                    b.HasOne("school_management_service.src.Core.Entities.ExtracurricularActivity", "Activity")
                         .WithMany("StudentActivities")
-                        .HasForeignKey("extracurricularActivityActivityId")
+                        .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("school_management_service.src.Core.Entities.Student", "student")
+                    b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
                         .WithMany("StudentActivities")
-                        .HasForeignKey("studentCitizenId")
+                        .HasForeignKey("CitizenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("extracurricularActivity");
+                    b.Navigation("Activity");
 
-                    b.Navigation("student");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.StudentExtracurricular", b =>
                 {
-                    b.HasOne("school_management_service.src.Core.Entities.ExtracurricularActivity", "extracurricularActivity")
-                        .WithMany()
-                        .HasForeignKey("extracurricularActivityActivityId")
+                    b.HasOne("school_management_service.src.Core.Entities.ExtracurricularActivity", "Activity")
+                        .WithMany("StudentExtracurriculars")
+                        .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("school_management_service.src.Core.Entities.Student", "student")
-                        .WithMany()
-                        .HasForeignKey("studentCitizenId")
+                    b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
+                        .WithMany("StudentExtracurriculars")
+                        .HasForeignKey("CitizenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("extracurricularActivity");
+                    b.Navigation("Activity");
 
-                    b.Navigation("student");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.ExtracurricularActivity", b =>
                 {
                     b.Navigation("StudentActivities");
+
+                    b.Navigation("StudentExtracurriculars");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.SchoolClass", b =>
@@ -901,6 +805,8 @@ namespace school_management_service.Migrations
                     b.Navigation("ParentGuardians");
 
                     b.Navigation("StudentActivities");
+
+                    b.Navigation("StudentExtracurriculars");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.Subject", b =>

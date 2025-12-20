@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace school_management_service.src.Core.Entities
 {
     public class ParentGuardian
     {
-        // PRIMARY KEY
+    // PRIMARY KEY
     [Key]
     public int GuardianId { get; set; }
 
@@ -26,9 +27,10 @@ namespace school_management_service.src.Core.Entities
 
     public bool PrimaryContact { get; set; }  // true if this guardian is the primary contact
    
-   // FOREIGN KEY (links to Student/Citizen)
-    public required string CitizenId { get; set; }
-    public Student student{get;set;}
+    // FOREIGN KEY (links to Student/Citizen)
+    public required Guid CitizenId { get; set; }
+    [ForeignKey("CitizenId")]
+    public Student Student{get;set;}
 
     }
 }

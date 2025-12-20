@@ -30,12 +30,12 @@ namespace school_management_service.src.Core.Entities
 
     public bool IsActive { get; set; }               // true if currently active
    
-    public List<SchoolClass> SchoolClasses{get;set;}
+    public List<SchoolClass> SchoolClasses{get;set;}=new List<SchoolClass>();
 
 
-    public List<BehavioralRecord> BehavioralRecords{get;set;}
+    public List<BehavioralRecord> BehavioralRecords{get;set;}=new List<BehavioralRecord>();
 
-    public List<ExtracurricularActivity>ExtracurricularActivities{get;set;}
+    public List<ExtracurricularActivity>ExtracurricularActivities{get;set;}=new List<ExtracurricularActivity>();
    
     }
 }

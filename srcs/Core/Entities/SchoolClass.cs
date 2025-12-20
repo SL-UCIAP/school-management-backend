@@ -8,27 +8,24 @@ namespace school_management_service.src.Core.Entities
 {
     public class SchoolClass
     {
-        // PRIMARY KEY
+  
    [Key]
     public int ClassId { get; set; }
 
-    public required string GradeLevel { get; set; }      // e.g., "10", "11"
+    public required string GradeLevel { get; set; }      
 
-    public required string Section { get; set; }         // e.g., "A", "B"
+    public required string Section { get; set; }       
 
-  
+    public required string RoomNumber { get; set; }     
 
-    public required string RoomNumber { get; set; }      // e.g., "R101"
-
-    public int AcademicYear { get; set; }       // e.g., 2025
+    public int AcademicYear { get; set; }      
 
     public int MaxCapacity { get; set; } 
 
-  // FOREIGN KEY (links to Teacher)
-    public int ClassTeacherId { get; set; }
-    public Teacher teacher{get;set;}
+    public int TeacherId { get; set; }
+    public Teacher Teacher{get;set;}
 
-    public List<Student> Students{get;set;}
+    public List<Student> Students{get;set;}=new List<Student>();
 
 
 

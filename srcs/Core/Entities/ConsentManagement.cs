@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,8 +13,6 @@ namespace school_management_service.src.Core.Entities
     // PRIMARY KEY
     [Key]
     public int  Id { get; set; }
-
- 
 
     public required string OrganizationName { get; set; }
 
@@ -28,8 +27,9 @@ namespace school_management_service.src.Core.Entities
     public bool IsActive { get; set; }                // true if consent is currently active
     public required string ConsentToken { get; set; }  
 
-       // FOREIGN KEY (links to Student/Citizen)
-    public required string CitizenId { get; set; }
-    public Student student{get;set;}
+    // FOREIGN KEY (links to Student/Citizen)
+    public required Guid CitizenId { get; set; }
+    [ForeignKey("CitizenId")]
+    public Student Student{get;set;}
     }
 }

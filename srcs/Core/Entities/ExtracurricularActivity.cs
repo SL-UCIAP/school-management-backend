@@ -19,13 +19,13 @@ namespace school_management_service.src.Core.Entities
 
     public string Description { get; set; }=string.Empty;    // Optional details about the activity
 
-    // FOREIGN KEY (links to Teacher who coordinates the activity)
-    public int CoordinatorId { get; set; } 
+    // // FOREIGN KEY (links to Teacher who coordinates the activity)
+    public int TeacherId { get; set; } 
 
-    public Teacher teacher{get;set;}
+    public Teacher Teacher{get;set;}
 
-    public List<Student> students{get;set;}
-    public List<StudentActivity>StudentActivities{get;set;}
+    public List<StudentExtracurricular> StudentExtracurriculars { get; set; } = new List<StudentExtracurricular>();
+    public List<StudentActivity>StudentActivities{get;set;}=new List<StudentActivity>();
          
     }
 }
