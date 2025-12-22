@@ -12,7 +12,7 @@ using school_management_service.src.Infrastructure.Data;
 namespace school_management_service.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251220084435_InitialCreate")]
+    [Migration("20251222085258_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -203,54 +203,6 @@ namespace school_management_service.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("BehavioralRecords");
-                });
-
-            modelBuilder.Entity("school_management_service.src.Core.Entities.Cetificate", b =>
-                {
-                    b.Property<int>("CetificateId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CetificateId"));
-
-                    b.Property<string>("CertificateNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("CertificateType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("CitizenId")
-                        .HasColumnType("uuid");
-
-                    b.Property<byte[]>("DigitalSignature")
-                        .IsRequired()
-                        .HasColumnType("bytea");
-
-                    b.Property<bool>("IsValid")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("IssueDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("IssuedBy")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Purpose")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("VerificationCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("CetificateId");
-
-                    b.HasIndex("CitizenId");
-
-                    b.ToTable("Certificates");
                 });
 
             modelBuilder.Entity("school_management_service.src.Core.Entities.ConsentManagement", b =>
@@ -607,6 +559,54 @@ namespace school_management_service.Migrations
                     b.ToTable("Teachers");
                 });
 
+            modelBuilder.Entity("school_management_service.srcs.Core.Entities.Certificate", b =>
+                {
+                    b.Property<int>("CertificateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CertificateId"));
+
+                    b.Property<string>("CertificateHtml")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CertificateNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CertificateType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("CitizenId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsValid")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("IssueDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("IssuedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Purpose")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("VerificationCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("CertificateId");
+
+                    b.HasIndex("CitizenId");
+
+                    b.ToTable("Certificates");
+                });
+
             modelBuilder.Entity("school_management_service.src.Core.Entities.AcademicRecord", b =>
                 {
                     b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
@@ -671,17 +671,6 @@ namespace school_management_service.Migrations
                         .IsRequired();
 
                     b.Navigation("ReportedBy");
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("school_management_service.src.Core.Entities.Cetificate", b =>
-                {
-                    b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
-                        .WithMany("Cetificates")
-                        .HasForeignKey("CitizenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("Student");
                 });
@@ -775,6 +764,17 @@ namespace school_management_service.Migrations
                         .IsRequired();
 
                     b.Navigation("Activity");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("school_management_service.srcs.Core.Entities.Certificate", b =>
+                {
+                    b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
+                        .WithMany("Cetificates")
+                        .HasForeignKey("CitizenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Student");
                 });

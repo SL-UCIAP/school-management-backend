@@ -12,7 +12,7 @@ using school_management_service.srcs.Core.Interfaces.Services;
 namespace school_management_service.srcs.API.Controllers
 {     
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class StudentController(IStudentService studentService) : ControllerBase
     {
          public readonly IStudentService _studentService=studentService;
@@ -29,7 +29,7 @@ namespace school_management_service.srcs.API.Controllers
             var student=await _studentService.CreateStudentAsync(createRequest);
             return Ok(student);
         }
-        [HttpPatch("{citizenId}")]
+        [HttpPut("{citizenId}")]
         public async Task<ActionResult<StudentResponse>>UpdateStudent(Guid citizenId,[FromBody]StudentUpdateRequest updateRequest)
         {
             var updated=await _studentService.UpdateStudentAsync(citizenId,updateRequest);

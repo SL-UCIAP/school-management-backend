@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Net.Http.Headers;
 using school_management_service.src.Core.Enums;
+using school_management_service.srcs.Core.Entities;
 
 namespace school_management_service.src.Core.Entities
 {
@@ -53,7 +54,7 @@ namespace school_management_service.src.Core.Entities
     public List<AcademicRecord>AcademicRecords{get;set;}=new List<AcademicRecord>();
     public List<Attendance>Attendances{get;set;}=new List<Attendance>();
     public List<BehavioralRecord>BehavioralRecords{get;set;}=new List<BehavioralRecord>();
-    public List<Cetificate>Cetificates{get;set;}=new List<Cetificate>();
+    public List<Certificate>Cetificates{get;set;}=new List<Certificate>();
 
     public List<AccessLog>AccessLogs{get;set;}=new List<AccessLog>();
     public List<ConsentManagement> ConsentManagements{get;set;}=new List<ConsentManagement>();

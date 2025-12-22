@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using school_management_service.src.Core.Entities;
+using school_management_service.srcs.Core.Entities;
 
 namespace school_management_service.src.Infrastructure.Data
 {
@@ -24,7 +25,7 @@ namespace school_management_service.src.Infrastructure.Data
             public DbSet<ExtracurricularActivity> ExtracurricularActivities { get; set; }
             public DbSet<StudentExtracurricular> StudentExtracurriculars { get; set; }
 
-            public DbSet<Cetificate> Certificates { get; set; }
+            public DbSet<Certificate> Certificates { get; set; }
 
             public DbSet<ConsentManagement> ConsentManagements { get; set; }
             public DbSet<AccessLog> AccessLogs { get; set; }

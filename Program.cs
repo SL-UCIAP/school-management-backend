@@ -28,7 +28,9 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.Converters.Add(
             new JsonStringEnumConverter());
     });
-
+builder.Services.AddScoped<ICertificateRepository,CertificateRepository>();
+builder.Services.AddScoped<ICertificateService,CertificateService>();
+builder.Services.AddAutoMapper(typeof(CertificateMappingProfile));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

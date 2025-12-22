@@ -55,7 +55,7 @@ namespace school_management_service.srcs.Application.Services
            student.UpdatedAt=DateTime.UtcNow;
            await _studentRepo.SaveChangesAsync();
            return _mapper.Map<StudentResponse>(student);
-        }
+        } 
     }
 
 }

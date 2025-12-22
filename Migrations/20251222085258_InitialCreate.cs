@@ -257,7 +257,7 @@ namespace school_management_service.Migrations
                 name: "Certificates",
                 columns: table => new
                 {
-                    CetificateId = table.Column<int>(type: "integer", nullable: false)
+                    CertificateId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CertificateType = table.Column<string>(type: "text", nullable: false),
                     CertificateNumber = table.Column<string>(type: "text", nullable: false),
@@ -266,12 +266,12 @@ namespace school_management_service.Migrations
                     Purpose = table.Column<string>(type: "text", nullable: false),
                     VerificationCode = table.Column<string>(type: "text", nullable: false),
                     IsValid = table.Column<bool>(type: "boolean", nullable: false),
-                    DigitalSignature = table.Column<byte[]>(type: "bytea", nullable: false),
+                    CertificateHtml = table.Column<string>(type: "text", nullable: false),
                     CitizenId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Certificates", x => x.CetificateId);
+                    table.PrimaryKey("PK_Certificates", x => x.CertificateId);
                     table.ForeignKey(
                         name: "FK_Certificates_Students_CitizenId",
                         column: x => x.CitizenId,
