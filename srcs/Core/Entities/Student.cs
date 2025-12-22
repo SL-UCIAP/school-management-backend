@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
@@ -11,12 +12,12 @@ namespace school_management_service.src.Core.Entities
 {
     public class Student
     {
-       // PRIMARY KEY
+    // PRIMARY KEY
     [Key]
-    public required string CitizenId { get; set; }
+    public  Guid CitizenId { get; set; }
 
     // UNIQUE KEY
-    public required string SchoolStudentId { get; set; }
+    public int SchoolStudentId { get; set; }
 
     public string FirstName { get; set; } =string.Empty;
 
@@ -45,18 +46,19 @@ namespace school_management_service.src.Core.Entities
     public DateTime UpdatedAt { get; set; }
 
      public int ClassId { get; set; }
-     public SchoolClass schoolClass{get;set;}
+     [ForeignKey("ClassId")]
+     public SchoolClass SchoolClass{get;set;}
 
-    public List<ParentGuardian>ParentGuardians{get;set;}
-    public List<AcademicRecord>AcademicRecords{get;set;}
-    public List<Attendance>Attendances{get;set;}
-    public List<BehavioralRecord>BehavioralRecords{get;set;}
-    public List<Cetificate>Cetificates{get;set;}
+    public List<ParentGuardian>ParentGuardians{get;set;} =new List<ParentGuardian>();
+    public List<AcademicRecord>AcademicRecords{get;set;}=new List<AcademicRecord>();
+    public List<Attendance>Attendances{get;set;}=new List<Attendance>();
+    public List<BehavioralRecord>BehavioralRecords{get;set;}=new List<BehavioralRecord>();
+    public List<Cetificate>Cetificates{get;set;}=new List<Cetificate>();
 
-    public List<AccessLog>AccessLogs{get;set;}
-    public List<ConsentManagement> ConsentManagements{get;set;}
+    public List<AccessLog>AccessLogs{get;set;}=new List<AccessLog>();
+    public List<ConsentManagement> ConsentManagements{get;set;}=new List<ConsentManagement>();
 
-    public List<ExtracurricularActivity>ExtracurricularActivities{get;set;}
-    public List<StudentActivity> StudentActivities{get;set;}
+    public List<StudentExtracurricular> StudentExtracurriculars { get; set; } = new List<StudentExtracurricular>();
+    public List<StudentActivity> StudentActivities{get;set;}=new List<StudentActivity>();
 
 }}

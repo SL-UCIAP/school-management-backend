@@ -60,7 +60,6 @@ namespace school_management_service.Migrations
                     ActivityName = table.Column<string>(type: "text", nullable: false),
                     Category = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    CoordinatorId = table.Column<int>(type: "integer", nullable: false),
                     TeacherId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -85,7 +84,6 @@ namespace school_management_service.Migrations
                     RoomNumber = table.Column<string>(type: "text", nullable: false),
                     AcademicYear = table.Column<int>(type: "integer", nullable: false),
                     MaxCapacity = table.Column<int>(type: "integer", nullable: false),
-                    ClassTeacherId = table.Column<int>(type: "integer", nullable: false),
                     TeacherId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -103,8 +101,8 @@ namespace school_management_service.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    CitizenId = table.Column<string>(type: "text", nullable: false),
-                    SchoolStudentId = table.Column<string>(type: "text", nullable: false),
+                    CitizenId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SchoolStudentId = table.Column<int>(type: "integer", nullable: false),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -118,15 +116,14 @@ namespace school_management_service.Migrations
                     Status = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ClassId = table.Column<int>(type: "integer", nullable: false),
-                    schoolClassClassId = table.Column<int>(type: "integer", nullable: false)
+                    ClassId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.CitizenId);
                     table.ForeignKey(
-                        name: "FK_Students_SchoolClasses_schoolClassClassId",
-                        column: x => x.schoolClassClassId,
+                        name: "FK_Students_SchoolClasses_ClassId",
+                        column: x => x.ClassId,
                         principalTable: "SchoolClasses",
                         principalColumn: "ClassId",
                         onDelete: ReferentialAction.Cascade);
@@ -147,16 +144,15 @@ namespace school_management_service.Migrations
                     TeacherRemarks = table.Column<string>(type: "text", nullable: true),
                     ExamDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CitizenId = table.Column<string>(type: "text", nullable: false),
-                    studentCitizenId = table.Column<string>(type: "text", nullable: false),
+                    CitizenId = table.Column<Guid>(type: "uuid", nullable: false),
                     SubjectId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AcademicRecords", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AcademicRecords_Students_studentCitizenId",
-                        column: x => x.studentCitizenId,
+                        name: "FK_AcademicRecords_Students_CitizenId",
+                        column: x => x.CitizenId,
                         principalTable: "Students",
                         principalColumn: "CitizenId",
                         onDelete: ReferentialAction.Cascade);
@@ -179,16 +175,16 @@ namespace school_management_service.Migrations
                     DataAccessed = table.Column<string>(type: "text", nullable: false),
                     AccessTimestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Purpose = table.Column<string>(type: "text", nullable: false),
+                    AccessStatus = table.Column<int>(type: "integer", nullable: false),
                     IpAddress = table.Column<string>(type: "text", nullable: false),
-                    CitizenId = table.Column<string>(type: "text", nullable: false),
-                    studentCitizenId = table.Column<string>(type: "text", nullable: false)
+                    CitizenId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AccessLogs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AccessLogs_Students_studentCitizenId",
-                        column: x => x.studentCitizenId,
+                        name: "FK_AccessLogs_Students_CitizenId",
+                        column: x => x.CitizenId,
                         principalTable: "Students",
                         principalColumn: "CitizenId",
                         onDelete: ReferentialAction.Cascade);
@@ -205,16 +201,15 @@ namespace school_management_service.Migrations
                     PeriodNumber = table.Column<int>(type: "integer", nullable: false),
                     MarkedBy = table.Column<string>(type: "text", nullable: false),
                     MarkedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CitizenId = table.Column<string>(type: "text", nullable: false),
-                    studentCitizenId = table.Column<string>(type: "text", nullable: false),
+                    CitizenId = table.Column<Guid>(type: "uuid", nullable: false),
                     SubjectId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Attendances", x => x.AttendanceId);
                     table.ForeignKey(
-                        name: "FK_Attendances_Students_studentCitizenId",
-                        column: x => x.studentCitizenId,
+                        name: "FK_Attendances_Students_CitizenId",
+                        column: x => x.CitizenId,
                         principalTable: "Students",
                         principalColumn: "CitizenId",
                         onDelete: ReferentialAction.Cascade);
@@ -238,17 +233,15 @@ namespace school_management_service.Migrations
                     ActionTaken = table.Column<string>(type: "text", nullable: false),
                     SeverityLevel = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CitizenId = table.Column<string>(type: "text", nullable: false),
-                    studentCitizenId = table.Column<string>(type: "text", nullable: false),
-                    ReportedBy = table.Column<int>(type: "integer", nullable: false),
+                    CitizenId = table.Column<Guid>(type: "uuid", nullable: false),
                     TeacherId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BehavioralRecords", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BehavioralRecords_Students_studentCitizenId",
-                        column: x => x.studentCitizenId,
+                        name: "FK_BehavioralRecords_Students_CitizenId",
+                        column: x => x.CitizenId,
                         principalTable: "Students",
                         principalColumn: "CitizenId",
                         onDelete: ReferentialAction.Cascade);
@@ -274,15 +267,14 @@ namespace school_management_service.Migrations
                     VerificationCode = table.Column<string>(type: "text", nullable: false),
                     IsValid = table.Column<bool>(type: "boolean", nullable: false),
                     DigitalSignature = table.Column<byte[]>(type: "bytea", nullable: false),
-                    CitizenId = table.Column<string>(type: "text", nullable: false),
-                    studentCitizenId = table.Column<string>(type: "text", nullable: false)
+                    CitizenId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Certificates", x => x.CetificateId);
                     table.ForeignKey(
-                        name: "FK_Certificates_Students_studentCitizenId",
-                        column: x => x.studentCitizenId,
+                        name: "FK_Certificates_Students_CitizenId",
+                        column: x => x.CitizenId,
                         principalTable: "Students",
                         principalColumn: "CitizenId",
                         onDelete: ReferentialAction.Cascade);
@@ -301,39 +293,14 @@ namespace school_management_service.Migrations
                     ConsentExpiryDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     ConsentToken = table.Column<string>(type: "text", nullable: false),
-                    CitizenId = table.Column<string>(type: "text", nullable: false),
-                    studentCitizenId = table.Column<string>(type: "text", nullable: false)
+                    CitizenId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ConsentManagements", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ConsentManagements_Students_studentCitizenId",
-                        column: x => x.studentCitizenId,
-                        principalTable: "Students",
-                        principalColumn: "CitizenId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ExtracurricularActivityStudent",
-                columns: table => new
-                {
-                    ExtracurricularActivitiesActivityId = table.Column<int>(type: "integer", nullable: false),
-                    studentsCitizenId = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ExtracurricularActivityStudent", x => new { x.ExtracurricularActivitiesActivityId, x.studentsCitizenId });
-                    table.ForeignKey(
-                        name: "FK_ExtracurricularActivityStudent_ExtracurricularActivities_Ex~",
-                        column: x => x.ExtracurricularActivitiesActivityId,
-                        principalTable: "ExtracurricularActivities",
-                        principalColumn: "ActivityId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ExtracurricularActivityStudent_Students_studentsCitizenId",
-                        column: x => x.studentsCitizenId,
+                        name: "FK_ConsentManagements_Students_CitizenId",
+                        column: x => x.CitizenId,
                         principalTable: "Students",
                         principalColumn: "CitizenId",
                         onDelete: ReferentialAction.Cascade);
@@ -352,15 +319,14 @@ namespace school_management_service.Migrations
                     Address = table.Column<string>(type: "text", nullable: false),
                     Occupation = table.Column<string>(type: "text", nullable: false),
                     PrimaryContact = table.Column<bool>(type: "boolean", nullable: false),
-                    CitizenId = table.Column<string>(type: "text", nullable: false),
-                    studentCitizenId = table.Column<string>(type: "text", nullable: false)
+                    CitizenId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ParentGuardians", x => x.GuardianId);
                     table.ForeignKey(
-                        name: "FK_ParentGuardians_Students_studentCitizenId",
-                        column: x => x.studentCitizenId,
+                        name: "FK_ParentGuardians_Students_CitizenId",
+                        column: x => x.CitizenId,
                         principalTable: "Students",
                         principalColumn: "CitizenId",
                         onDelete: ReferentialAction.Cascade);
@@ -372,10 +338,8 @@ namespace school_management_service.Migrations
                 {
                     EnrollmentId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CitizenId = table.Column<string>(type: "text", nullable: false),
-                    studentCitizenId = table.Column<string>(type: "text", nullable: false),
+                    CitizenId = table.Column<Guid>(type: "uuid", nullable: false),
                     ActivityId = table.Column<int>(type: "integer", nullable: false),
-                    extracurricularActivityActivityId = table.Column<int>(type: "integer", nullable: false),
                     EnrollmentDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     RolePosition = table.Column<string>(type: "text", nullable: false),
                     Achievement = table.Column<string>(type: "text", nullable: false),
@@ -385,14 +349,14 @@ namespace school_management_service.Migrations
                 {
                     table.PrimaryKey("PK_StudentActivities", x => x.EnrollmentId);
                     table.ForeignKey(
-                        name: "FK_StudentActivities_ExtracurricularActivities_extracurricular~",
-                        column: x => x.extracurricularActivityActivityId,
+                        name: "FK_StudentActivities_ExtracurricularActivities_ActivityId",
+                        column: x => x.ActivityId,
                         principalTable: "ExtracurricularActivities",
                         principalColumn: "ActivityId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentActivities_Students_studentCitizenId",
-                        column: x => x.studentCitizenId,
+                        name: "FK_StudentActivities_Students_CitizenId",
+                        column: x => x.CitizenId,
                         principalTable: "Students",
                         principalColumn: "CitizenId",
                         onDelete: ReferentialAction.Cascade);
@@ -402,34 +366,30 @@ namespace school_management_service.Migrations
                 name: "StudentExtracurriculars",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CitizenId = table.Column<string>(type: "text", nullable: false),
-                    studentCitizenId = table.Column<string>(type: "text", nullable: false),
-                    ActivityId = table.Column<int>(type: "integer", nullable: false),
-                    extracurricularActivityActivityId = table.Column<int>(type: "integer", nullable: false)
+                    CitizenId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ActivityId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StudentExtracurriculars", x => x.Id);
+                    table.PrimaryKey("PK_StudentExtracurriculars", x => new { x.CitizenId, x.ActivityId });
                     table.ForeignKey(
-                        name: "FK_StudentExtracurriculars_ExtracurricularActivities_extracurr~",
-                        column: x => x.extracurricularActivityActivityId,
+                        name: "FK_StudentExtracurriculars_ExtracurricularActivities_ActivityId",
+                        column: x => x.ActivityId,
                         principalTable: "ExtracurricularActivities",
                         principalColumn: "ActivityId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentExtracurriculars_Students_studentCitizenId",
-                        column: x => x.studentCitizenId,
+                        name: "FK_StudentExtracurriculars_Students_CitizenId",
+                        column: x => x.CitizenId,
                         principalTable: "Students",
                         principalColumn: "CitizenId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AcademicRecords_studentCitizenId",
+                name: "IX_AcademicRecords_CitizenId",
                 table: "AcademicRecords",
-                column: "studentCitizenId");
+                column: "CitizenId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AcademicRecords_SubjectId",
@@ -437,14 +397,14 @@ namespace school_management_service.Migrations
                 column: "SubjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AccessLogs_studentCitizenId",
+                name: "IX_AccessLogs_CitizenId",
                 table: "AccessLogs",
-                column: "studentCitizenId");
+                column: "CitizenId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attendances_studentCitizenId",
+                name: "IX_Attendances_CitizenId",
                 table: "Attendances",
-                column: "studentCitizenId");
+                column: "CitizenId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Attendances_SubjectId",
@@ -452,9 +412,9 @@ namespace school_management_service.Migrations
                 column: "SubjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BehavioralRecords_studentCitizenId",
+                name: "IX_BehavioralRecords_CitizenId",
                 table: "BehavioralRecords",
-                column: "studentCitizenId");
+                column: "CitizenId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BehavioralRecords_TeacherId",
@@ -462,14 +422,14 @@ namespace school_management_service.Migrations
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Certificates_studentCitizenId",
+                name: "IX_Certificates_CitizenId",
                 table: "Certificates",
-                column: "studentCitizenId");
+                column: "CitizenId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ConsentManagements_studentCitizenId",
+                name: "IX_ConsentManagements_CitizenId",
                 table: "ConsentManagements",
-                column: "studentCitizenId");
+                column: "CitizenId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExtracurricularActivities_TeacherId",
@@ -477,14 +437,9 @@ namespace school_management_service.Migrations
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExtracurricularActivityStudent_studentsCitizenId",
-                table: "ExtracurricularActivityStudent",
-                column: "studentsCitizenId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ParentGuardians_studentCitizenId",
+                name: "IX_ParentGuardians_CitizenId",
                 table: "ParentGuardians",
-                column: "studentCitizenId");
+                column: "CitizenId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SchoolClasses_TeacherId",
@@ -492,29 +447,24 @@ namespace school_management_service.Migrations
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentActivities_extracurricularActivityActivityId",
+                name: "IX_StudentActivities_ActivityId",
                 table: "StudentActivities",
-                column: "extracurricularActivityActivityId");
+                column: "ActivityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentActivities_studentCitizenId",
+                name: "IX_StudentActivities_CitizenId",
                 table: "StudentActivities",
-                column: "studentCitizenId");
+                column: "CitizenId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentExtracurriculars_extracurricularActivityActivityId",
+                name: "IX_StudentExtracurriculars_ActivityId",
                 table: "StudentExtracurriculars",
-                column: "extracurricularActivityActivityId");
+                column: "ActivityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentExtracurriculars_studentCitizenId",
-                table: "StudentExtracurriculars",
-                column: "studentCitizenId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Students_schoolClassClassId",
+                name: "IX_Students_ClassId",
                 table: "Students",
-                column: "schoolClassClassId");
+                column: "ClassId");
         }
 
         /// <inheritdoc />
@@ -537,9 +487,6 @@ namespace school_management_service.Migrations
 
             migrationBuilder.DropTable(
                 name: "ConsentManagements");
-
-            migrationBuilder.DropTable(
-                name: "ExtracurricularActivityStudent");
 
             migrationBuilder.DropTable(
                 name: "ParentGuardians");

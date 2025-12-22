@@ -7,7 +7,7 @@ namespace school_management_service.src.Core.Entities
 {
     public class Subject
     {
-          // PRIMARY KEY
+    // PRIMARY KEY
     public int SubjectId { get; set; }
 
     // UNIQUE KEY
@@ -23,8 +23,8 @@ namespace school_management_service.src.Core.Entities
 
     public bool IsActive { get; set; }       // t
 
-    public List<AcademicRecord>AcademicRecords{get;set;}
+    public List<AcademicRecord>AcademicRecords{get;set;}=new List<AcademicRecord>();
 
-    public List<Attendance>Attendances{get;set;}
+    public List<Attendance>Attendances{get;set;}=new List<Attendance>();
     }
 }

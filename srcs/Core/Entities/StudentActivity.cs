@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,18 +9,19 @@ namespace school_management_service.src.Core.Entities
 {
     public class StudentActivity
     {
-         // PRIMARY KEY
+    // PRIMARY KEY
          
    [Key]
     public int EnrollmentId { get; set; }
 
     // FOREIGN KEY (links to Student/Citizen)
-    public required string CitizenId { get; set; }
-    public Student student{get;set;}
+    public required Guid CitizenId { get; set; }
+    [ForeignKey("CitizenId")]
+    public Student Student{get;set;}
 
     // FOREIGN KEY (links to ExtracurricularActivity)
     public int ActivityId { get; set; }
-    public ExtracurricularActivity extracurricularActivity{get;set;}
+    public ExtracurricularActivity Activity{get;set;}
 
     public DateTime EnrollmentDate { get; set; }  // Date student joined the activity
 

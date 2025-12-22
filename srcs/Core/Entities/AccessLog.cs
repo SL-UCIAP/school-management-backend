@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using school_management_service.srcs.Core.Enums;
 
 namespace school_management_service.src.Core.Entities
 {
     public class AccessLog
     {
-        // PRIMARY KEY
+     // PRIMARY KEY
 
     [Key]
     public int Id { get; set; }
-
-    
 
     public required string RequesterOrganization { get; set; }
 
@@ -25,11 +25,12 @@ namespace school_management_service.src.Core.Entities
 
     public required string Purpose { get; set; }          // Reason for accessing data
 
-  //  public AccessStatus AccessStatus { get; set; } // Enum: Allowed, Denied
+    public AccessStatus AccessStatus { get; set; }      // Enum: Allowed, Denied
 
     public required string IpAddress { get; set; }        // IPv4 or IPv6
-   // FOREIGN KEY (links to Student/Citizen)
-    public required string CitizenId { get; set; }
-    public Student student{get;set;}
+  //  // FOREIGN KEY (links to Student/Citizen)
+    public  Guid CitizenId { get; set; }
+    [ForeignKey("CitizenId")]
+    public Student Student{get;set;}
     }
 }
