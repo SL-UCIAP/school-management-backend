@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using school_management_service.src.Infrastructure.Data;
+using school_management_service.Infrastructure.Data;
 
 #nullable disable
 
@@ -202,13 +202,17 @@ namespace school_management_service.Migrations
                     b.ToTable("BehavioralRecords");
                 });
 
-            modelBuilder.Entity("school_management_service.src.Core.Entities.Cetificate", b =>
+            modelBuilder.Entity("school_management_service.src.Core.Entities.Certificate", b =>
                 {
-                    b.Property<int>("CetificateId")
+                    b.Property<int>("CertificateId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CetificateId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CertificateId"));
+
+                    b.Property<string>("CertificateHtml")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("CertificateNumber")
                         .IsRequired()
@@ -220,10 +224,6 @@ namespace school_management_service.Migrations
 
                     b.Property<Guid>("CitizenId")
                         .HasColumnType("uuid");
-
-                    b.Property<byte[]>("DigitalSignature")
-                        .IsRequired()
-                        .HasColumnType("bytea");
 
                     b.Property<bool>("IsValid")
                         .HasColumnType("boolean");
@@ -243,7 +243,7 @@ namespace school_management_service.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("CetificateId");
+                    b.HasKey("CertificateId");
 
                     b.HasIndex("CitizenId");
 
@@ -672,7 +672,7 @@ namespace school_management_service.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("school_management_service.src.Core.Entities.Cetificate", b =>
+            modelBuilder.Entity("school_management_service.src.Core.Entities.Certificate", b =>
                 {
                     b.HasOne("school_management_service.src.Core.Entities.Student", "Student")
                         .WithMany("Cetificates")
