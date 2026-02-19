@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/garuka/Documents/C#/net/school-management-backend/school-management-service.csproj": {}
+    "/home/garuka/Documents/CCharp/net/school-management-backend/school-management-service.csproj": {}
   },
   "projects": {
-    "/home/garuka/Documents/C#/net/school-management-backend/school-management-service.csproj": {
+    "/home/garuka/Documents/CCharp/net/school-management-backend/school-management-service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/garuka/Documents/C#/net/school-management-backend/school-management-service.csproj",
+        "projectUniqueName": "/home/garuka/Documents/CCharp/net/school-management-backend/school-management-service.csproj",
         "projectName": "school-management-service",
-        "projectPath": "/home/garuka/Documents/C#/net/school-management-backend/school-management-service.csproj",
+        "projectPath": "/home/garuka/Documents/CCharp/net/school-management-backend/school-management-service.csproj",
         "packagesPath": "/home/garuka/.nuget/packages/",
-        "outputPath": "/home/garuka/Documents/C#/net/school-management-backend/obj/",
+        "outputPath": "/home/garuka/Documents/CCharp/net/school-management-backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/garuka/.nuget/NuGet/NuGet.Config"

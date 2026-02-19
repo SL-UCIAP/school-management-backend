@@ -4591,11 +4591,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/garuka/Documents/C#/net/school-management-backend/school-management-service.csproj",
+      "projectUniqueName": "/home/garuka/Documents/CCharp/net/school-management-backend/school-management-service.csproj",
       "projectName": "school-management-service",
-      "projectPath": "/home/garuka/Documents/C#/net/school-management-backend/school-management-service.csproj",
+      "projectPath": "/home/garuka/Documents/CCharp/net/school-management-backend/school-management-service.csproj",
       "packagesPath": "/home/garuka/.nuget/packages/",
-      "outputPath": "/home/garuka/Documents/C#/net/school-management-backend/obj/",
+      "outputPath": "/home/garuka/Documents/CCharp/net/school-management-backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/garuka/.nuget/NuGet/NuGet.Config"
@@ -4671,13 +4671,5 @@
         "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.118/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
-    }
-  ]
+  }
 }
