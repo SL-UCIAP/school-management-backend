@@ -46,6 +46,21 @@ builder.Services.AddScoped<IAttendanceRepository,AttendanceRepository>();
 builder.Services.AddScoped<IAttendanceService,AttendanceService>();
 builder.Services.AddAutoMapper(typeof(AttendanceMappingProfile));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontendPolicy", policy =>
+    {
+        policy
+            .WithOrigins(
+                "http://localhost:3000",  // React
+                "http://localhost:4200",  // Angular
+                "http://localhost:5173"   // Vite
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials(); // remove this if you don't use cookies/auth
+    });
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -58,7 +73,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("FrontendPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

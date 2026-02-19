@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "c4fvgr/1230=",
+  "dgSpecHash": "Zy94tu2UBwPUIX6D2F8rPopypDq2ZWxFRlJDmf0C4Kx1BbyRnIIWq8eNkuucJyioaC9YDUeF+4Ir761aEehZFQ==",
   "success": true,
-  "projectFilePath": "/home/garuka/Documents/C#/net/school-management-backend/school-management-service.csproj",
+  "projectFilePath": "/home/garuka/Documents/CCharp/net/school-management-backend/school-management-service.csproj",
   "expectedPackageFiles": [
     "/home/garuka/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/home/garuka/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
@@ -90,15 +90,5 @@
     "/home/garuka/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/home/garuka/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
-      "projectPath": "/home/garuka/Documents/C#/net/school-management-backend/school-management-service.csproj",
-      "warningLevel": 1,
-      "filePath": "/home/garuka/Documents/C#/net/school-management-backend/school-management-service.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }
